@@ -56,6 +56,8 @@ int main(int argc, char *argv[]) {
 
   /**
    * Let's start printing some stupid stuff.
+   *
+   * @todo: Finish this and use C, not bash.
    */
   printf("\n");
 
