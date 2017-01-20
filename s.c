@@ -15,10 +15,11 @@ typedef struct {
 } configuration;
 
 static int handler(void* user, const char* section, const char* name,
-  const char* value) {
+    const char* value) {
   configuration* pconfig = (configuration*)user;
 
-#define MATCH(s, n) strcmp(section, s) == 0 && strcmp(name, n) == 0
+  #define MATCH(s, n) strcmp(section, s) == 0 && strcmp(name, n) == 0
+
   if (MATCH("user", "name")) {
     pconfig->name = strdup(value);
   }
@@ -74,7 +75,7 @@ int main(int argc, char *argv[]) {
       return 1;
     }
 
-    // Check if there is a message, otherwise, open the default editor.
+    // Check if there is a message.
     if (argc < 3 ) {
       printf("No message was found.");
       printf("To send: s send <number> <msg>\n");
@@ -142,13 +143,13 @@ int main(int argc, char *argv[]) {
     curl_global_cleanup();
   }
   else if(argc > 1 &&
-    (strcmp(argv[1], "-v") == 0 || strcmp(argv[1], "--version") == 0)) {
+      (strcmp(argv[1], "-v") == 0 || strcmp(argv[1], "--version") == 0)) {
     printf("version beta-1.0\n");
     printf("by tae et. al.\n");
   }
   else if(argc == 1 ||
-    (argc > 1 && (strcmp(argv[1], "help") == 0 ||
-    strcmp(argv[1], "--help") == 0))) {
+      (argc > 1 && (strcmp(argv[1], "help") == 0 ||
+                    strcmp(argv[1], "--help") == 0))) {
     printf("             ____  __  __ ____\n");
     printf("            / ___||  \\/  / ___|\n");
     printf("            \\___ \\| |\\/| \\___ \\\n");
@@ -170,17 +171,20 @@ int isMobileNumber(char number[]) {
   int i = 0;
 
   // Check if the number is negative.
-  if (number[0] == '-')
+  if (number[0] == '-') {
     i = 1;
+  }
 
   // Check if the number has a leading + sign.
-  if (number[0] == '+')
+  if (number[0] == '+') {
     i = 1;
+  }
 
   // Check each char if it is a number.
   for (; number[i] != 0; i++) {
-    if (!isdigit(number[i]))
+    if (!isdigit(number[i])) {
       return 0;
+    }
   }
 
   return 1;
