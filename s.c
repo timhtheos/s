@@ -59,7 +59,16 @@ int main(int argc, char *argv[]) {
    */
   printf("\n");
 
-  if (argc > 1 && strcmp(argv[1], "send") == 0) {
+  if (argc > 1 && strcmp(argv[1], "init") == 0) {
+    if(access("s.ini", F_OK) == -1) {
+      printf("Creating s.ini file...");
+      system("touch s.ini && mkdir ~/.s");
+      system("spath=$(pwd) && ln -s $spath/s.ini $HOME/.s/");
+      /* system(""); */
+      /* system(""); */
+    }
+  }
+  else if (argc > 1 && strcmp(argv[1], "send") == 0) {
     // Check if the recipient's mobile number has been entered.
     if (argc == 2) {
       printf("Mobile number not entered.\n");
@@ -91,7 +100,7 @@ int main(int argc, char *argv[]) {
       system(stfileCommand);
 
       // Check if the messaged has been saved.
-      if(access(stfilePattern, F_OK ) == -1 ) {
+      if(access(stfilePattern, F_OK) == -1 ) {
         printf("Not found or invalid message.");
         printf("Sending message has been aborted.");
         return 1;
