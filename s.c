@@ -139,7 +139,7 @@ int main(int argc, char *argv[]) {
     }
 
     // Let's do the routine cleanup.
-    system("find /tmp/ -name "s_send_*" -exec rm {} \\;");
+    system("find /tmp/ -name \"s_send_*\" -exec rm {} \\;");
     curl_global_cleanup();
   }
   else if(argc > 1 &&
